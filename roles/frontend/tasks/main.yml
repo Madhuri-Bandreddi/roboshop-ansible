@@ -24,6 +24,11 @@
     dest: /usr/share/nginx/html
     remote_src: yes
 
+- name: Ensure Nginx is stopped
+  ansible.builtin.systemd:
+    state: stopped
+    name: nginx
+
 - name: Start Nginx
   ansible.builtin.systemd:
     state: started
