@@ -3,12 +3,6 @@
     name: nginx
     state: installed
 
-- name: Start Nginx service
-  ansible.builtin.systemd:
-    name: nginx
-    state: started
-    enabled: yes
-
 - name: Copy roboshop Config file
   ansible.builtin.template:
     src: roboshop.conf
@@ -30,9 +24,9 @@
     dest: /usr/share/nginx/html
     remote_src: yes
 
-#- name: Start Nginx
-#  ansible.builtin.systemd:
-#    state: restarted
-#    name: nginx
-#    enabled: true
 
+- name: Start Nginx service
+  ansible.builtin.systemd:
+    name: nginx
+    state: restarted
+    enabled: true

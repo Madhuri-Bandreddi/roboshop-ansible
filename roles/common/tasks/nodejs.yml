@@ -22,4 +22,3 @@
 - name: Include SystemD
   ansible.builtin.import_tasks:
     file: systemd_setup.yml
-
