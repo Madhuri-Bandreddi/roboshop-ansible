@@ -24,9 +24,47 @@
     dest: /usr/share/nginx/html
     remote_src: yes
 
-
 - name: Start Nginx service
   ansible.builtin.systemd:
     name: nginx
     state: restarted
     enabled: true
+
+- hosts: frontend
+  tasks:
+    - name: Test Nginx configuration
+      command: nginx -t
+      register: nginx_test
+      ignore_errors: yes
+
+    - name: Display Nginx configuration test results
+      debug:
+        var: nginx_test.stderr
+      when: nginx_test.failed
+
+    - name: Start Nginx service
+      service:
+        name: nginx
+        state: started
+      register: nginx_service_status
+      ignore_errors: yes
+
+    - name: Get Nginx service status
+      command: systemctl status nginx.service
+      register: nginx_status
+      ignore_errors: yes
+
+    - name: Display Nginx service status
+      debug:
+        var: nginx_status.stdout
+      when: nginx_service_status.failed
+
+    - name: Check journal logs
+      command: journalctl -xe
+      register: journal_logs
+      ignore_errors: yes
+
+    - name: Display journal logs
+      debug:
+        var: journal_logs.stdout
+      when: nginx_service_status.failed
