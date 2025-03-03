@@ -1,12 +1,12 @@
 - name: Configuring NodeJS repos
-  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_14.x | bash
+  ansible.builtin.shell: curl -sL https://rpm.nodesource.com/setup_16.x | sudo -E bash -
 
 - name: Install NodeJS
   ansible.builtin.yum:
     name: nodejs
     state: installed
 
-- name: Include app_prerequisites
+- name: Include task list in play
   ansible.builtin.import_tasks:
     file: app_prereq.yml
 
