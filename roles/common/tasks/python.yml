@@ -1,6 +1,6 @@
 - name: Install Python
   ansible.builtin.yum:
-    name :
+    name:
       - python36
       - gcc
       - python3-devel
@@ -15,16 +15,9 @@
   args:
     chdir: /app
 
-#- name: Include schema setup
-#  ansible.builtin.import_tasks:
-#  file: schema_setup.yml
 - name: Include schema setup
-  ansible.builtin.import_tasks: schema_setup.yml
-
-- name: Create a directory
-  ansible.builtin.file:
-    path: /path/to/directory
-    state: directory
+  ansible.builtin.import_tasks:
+    file: schema_setup.yml
 
 - name: Include SystemD
   ansible.builtin.import_tasks:
