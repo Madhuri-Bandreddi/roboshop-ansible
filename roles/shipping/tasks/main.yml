@@ -2,3 +2,6 @@
   ansible.builtin.import_role:
     name: common
    # tasks from: Java
+
+    - name: Include Specific Tasks from Common Role
+      include_tasks: roboshop-ansible/common/tasks/java.yml  # Adjust the path to your tasks file
