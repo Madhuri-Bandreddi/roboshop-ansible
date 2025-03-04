@@ -3,7 +3,7 @@
   block:
     - name: Copy mongo.repo file
       ansible.builtin.copy:
-        src: roles/common/files/mongo.repo
+        src: /root/roboshop-ansible/roles/common/files/mongo.repo
         dest: /etc/yum.repos.d/mongo.repo
         remote_src: yes
 
